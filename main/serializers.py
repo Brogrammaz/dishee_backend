@@ -9,7 +9,7 @@ class OrderSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id","first_name","last_name","email","phone_no","username"]
+        fields = ["id","first_name","last_name","email","phone_no","username","password"]
 
 class RecipeSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, response
 from main.serializers import *
 from main.models import *
 from rest_framework.parsers import MultiPartParser, FormParser 
@@ -12,6 +12,11 @@ class UserListApiView(generics.ListCreateAPIView):
 class UserDetailsApiView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+    def get(self, request, *args,**kwargs):
+        email = kwargs.get("email")
+        user = User.objects.get(email=email)
+        return response.Response(data=UserSerializer(user).data)
 
 class OrderListApiView(generics.ListCreateAPIView):
     serializer_class = OrderSerializer
